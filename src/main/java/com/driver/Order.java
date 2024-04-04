@@ -10,7 +10,15 @@ public class Order {
         // The deliveryTime has to converted from string to int and then stored in the attribute
         //deliveryTime  = HH*60 + MM
         this.id = id;
-        this.deliveryTime = convertDeliveryTimeToMinutes(deliveryTime);
+
+        String[] parts = deliveryTime.split(":");
+
+        // Parse hours and minutes from string to integers
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+
+        // Calculate delivery time in minutes
+        this.deliveryTime = hours * 60 + minutes;
     }
 
     public String getId() {
@@ -19,11 +27,5 @@ public class Order {
 
     public int getDeliveryTime() {
         return deliveryTime;
-    }
-    private int convertDeliveryTimeToMinutes(String deliveryTime) {
-        String[] timeSplit = deliveryTime.split(":");
-        int hours = Integer.parseInt(timeSplit[0]);
-        int minutes = Integer.parseInt(timeSplit[1]);
-        return hours * 60 + minutes;
     }
 }
